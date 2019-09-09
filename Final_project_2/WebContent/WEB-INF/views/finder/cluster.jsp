@@ -25,7 +25,8 @@
     </style>
 </head>
 <body>
-<div id="map" style="width:80%;height:800px;"></div>
+<div id="map" style="width:80%;height:690px; margin-left:10%;" ></div>
+<div id=""></div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -119,14 +120,12 @@ list.push("${list.tel}"); //list[i+4]
 			  	    overlay[i].setMap(map);
 			  	});
 			}
-		 
-	test(list);
 	
-	// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+	// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다	 
+</script>
+<script>
 
 
-	 
-	 
 </script>
 </body>
 </html>
