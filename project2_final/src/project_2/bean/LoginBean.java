@@ -22,7 +22,7 @@ public class LoginBean {
 	@RequestMapping("log.do")
 	public String Log(HttpSession session) throws Throwable {
 		   String clientId = "La0RtXyOJUt4BaBYv2rD";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://localhost:8080/Final_project_2/ex/callback.do", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://localhost:8080/project2_final/ex/callback.do", "UTF-8");
 		    SecureRandom random = new SecureRandom();
 		    String state = new BigInteger(130, random).toString();
 		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";

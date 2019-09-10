@@ -8,7 +8,7 @@
 </head>
 <body>
 테스트페이지
-<button onclick="window.location='/Final_project_2/signup/login.do'">로그인</button>
+<button onclick="window.location='../signup/login.do'">로그인</button>
 
 
 </body>
