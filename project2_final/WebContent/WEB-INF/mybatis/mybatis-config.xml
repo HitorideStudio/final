@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="vo" type="project.list.vo.PlaceList"/>
+		<typeAlias alias="tv" type="project.list.vo.TestVO"/>
+		<typeAlias alias="member" type="project.member.vo.memberVO"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="/sql/Map.xml"/>
+		<mapper resource="/sql/rindb.xml"/>
+		<mapper resource="/sql/testSQL.xml"/>
+		<mapper resource="/sql/member.xml"/>
+	</mappers>
+</configuration>
