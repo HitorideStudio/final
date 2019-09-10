@@ -49,7 +49,7 @@
 <body>
 	<form action ="joinPro.do" method="post" enctype="multipart/form-data" 
 	name="userinput" onSubmit="return checkIt()">
- 		이메일:<input type ="text" name="id"/>
+ 		아이디:<input type ="text" name="id"/>
  		<input type="button" name="confirm_id" value="ID중복확인" 
         							OnClick="openConfirmid(this.form)"><br/>
  		비밀번호:<input type ="password" name="pw"/><br/>
