@@ -56,6 +56,7 @@ list.push("${list.lon}"); //list[i+1]
 list.push("${list.lat}"); //list[i+2]
 list.push("${list.address}"); //list[i+3]
 list.push("${list.tel}"); //list[i+4]
+list.push("${list.place}");//list[i+5]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
 
@@ -72,7 +73,7 @@ list.push("${list.tel}"); //list[i+4]
 		console.log(clusterer);
 		
 		var overlay = new Array();
-		  for(i=0;i<list.length;i+=5){
+		  for(i=0;i<list.length;i+=6){
 				 markers = new kakao.maps.Marker({
 		       		map: map, // 마커를 표시할 지도
 		        	position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
@@ -94,7 +95,7 @@ list.push("${list.tel}"); //list[i+4]
 			        '            <div class="desc">' + 
 			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
 			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+			        '                <div><a href="/Final_project_2/finder/info.do?&address='+list[i+3]+'&placename='+list[i]+'&place='+list[i+5]+'" target="_blank" class="link">홈페이지</a></div>' + 
 			        '            </div>' + 
 			        '        </div>' + 
 			        '    </div>' +    

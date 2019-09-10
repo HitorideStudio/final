@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import project.list.vo.PlaceList;
+import project.list.vo.PlaceListVO;
 
 @Controller
 @RequestMapping("/map/")
@@ -22,7 +22,7 @@ public class Map {
 	@RequestMapping("map.do")
 	public ModelAndView map() {
 		ModelAndView model = new ModelAndView();
-		List<PlaceList> list = sql.selectList("mapsql.selectplacelist");
+		List<PlaceListVO> list = sql.selectList("mapsql.selectplacelist");
 		
 		model.addObject("list",list);
 		model.setViewName("/finder/map");
@@ -47,7 +47,7 @@ public class Map {
 	public ModelAndView welcome() {
 		ModelAndView model = new ModelAndView();
 		
-		List<PlaceList> list = sql.selectList("mapsql.selectplacelist");
+		List<PlaceListVO> list = sql.selectList("mapsql.selectplacelist");
 		
 		model.addObject("list",list);
 		model.setViewName("welcome");
