@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>Cluster Maker info</title>
     <style>
@@ -22,11 +23,28 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+    .glyphicon {
+              position: relative;
+              top: 1px;
+              display: block;
+              font-family: 'Glyphicons Halflings';
+              font-style: normal;
+              font-weight: normal;
+              line-height: 1;
+              font-size:2.3em;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;}
+    button{width:100px; height:60px; border:none; background:white; margin-left:50%;}
     </style>
 </head>
 <body>
-<div id="map" style="width:80%;height:690px; margin-left:10%;" ></div>
-<div id=""></div>
+   <div style="float:left;">
+      <button type="button" class="glyphicon glyphicon-search " onclick="" />
+      <button type="button" class="glyphicon glyphicon-share-alt " onclick="" />
+      <button type="button" class="glyphicon glyphicon-star " onclick=""  />
+      <button type="button" class="glyphicon glyphicon-heart-empty " onclick=""  />
+   </div>
+   <div id="map" style="width:80%;height:690px; margin-left:5%; float:left;"></div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -60,68 +78,68 @@ list.push("${list.tel}"); //list[i+4]
 // 마커 클러스터러를 생성합니다 
 
 
-	
-	
-		var clusterer = new kakao.maps.MarkerClusterer({
-		    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-		    minLevel: 2 // 클러스터 할 최소 지도 레벨 
-		});
+   
+   
+      var clusterer = new kakao.maps.MarkerClusterer({
+          map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+          averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+          minLevel: 2 // 클러스터 할 최소 지도 레벨 
+      });
 
-		
-		console.log(clusterer);
-		
-		var overlay = new Array();
-		  for(i=0;i<list.length;i+=5){
-				 markers = new kakao.maps.Marker({
-		       		map: map, // 마커를 표시할 지도
-		        	position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
-		        	title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		    	});
-		   	   clusterer.addMarker( markers ); //클러스터러 마커추가
+      
+      console.log(clusterer);
+      
+      var overlay = new Array();
+        for(i=0;i<list.length;i+=5){
+             markers = new kakao.maps.Marker({
+                   map: map, // 마커를 표시할 지도
+                 position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
+                 title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+             });
+               clusterer.addMarker( markers ); //클러스터러 마커추가
 
-			//클릭이벤트 커스텀오버레이 내용
-				var content = '<div class="wrap">' + 
-			        '    <div class="info">' + 
-			        '        <div class="title">' + 
-			                	list[i]    + 
-			        '            <div class="close" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
-			        '        </div>' + 
-			        '        <div class="body">' + 
-			        '            <div class="img">' +
-			        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-			        '           </div>' + 
-			        '            <div class="desc">' + 
-			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
-			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-			        '            </div>' + 
-			        '        </div>' + 
-			        '    </div>' +    
-			        '</div>';
-			        
-				clickover(i);
-				overlay[i].setMap(null);
-					  
-		      function closeOverlay(i) {
-		    	  overlay[i].setMap(null);     
-		      }
-		    	  			
+         //클릭이벤트 커스텀오버레이 내용
+            var content = '<div class="wrap">' + 
+                 '    <div class="info">' + 
+                 '        <div class="title">' + 
+                            list[i]    + 
+                 '            <div class="close" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
+                 '        </div>' + 
+                 '        <div class="body">' + 
+                 '            <div class="img">' +
+                 '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                 '           </div>' + 
+                 '            <div class="desc">' + 
+                 '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
+                 '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
+                 '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+                 '            </div>' + 
+                 '        </div>' + 
+                 '    </div>' +    
+                 '</div>';
+                 
+            clickover(i);
+            overlay[i].setMap(null);
+                 
+            function closeOverlay(i) {
+               overlay[i].setMap(null);     
+            }
+                        
 
-		  }
-		   	function clickover(i){
-		   		overlay[i] = new kakao.maps.CustomOverlay({
-				    content: content,
-				    map: map,
-				    position: new kakao.maps.LatLng(list[i+2],list[i+1])      
-				});
-				
-		   	 kakao.maps.event.addListener(markers, 'click', function() {
-			  	    overlay[i].setMap(map);
-			  	});
-			}
-	
-	// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다	 
+        }
+            function clickover(i){
+               overlay[i] = new kakao.maps.CustomOverlay({
+                content: content,
+                map: map,
+                position: new kakao.maps.LatLng(list[i+2],list[i+1])      
+            });
+            
+             kakao.maps.event.addListener(markers, 'click', function() {
+                  overlay[i].setMap(map);
+              });
+         }
+   
+   // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다    
 </script>
 <script>
 

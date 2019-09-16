@@ -58,7 +58,7 @@ public class LoginBean {
 	      con.setRequestMethod("POST");
 	      int responseCode = con.getResponseCode();
 	      BufferedReader br;
-	      System.out.print("responseCode="+responseCode +"끝");
+	      System.out.print("responseCode=시작"+responseCode +"끝");
 	      if(responseCode==200) { // 정상 호출
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
@@ -71,7 +71,7 @@ public class LoginBean {
 	      }
 	      br.close();
 	      if(responseCode==200) {
-	    	System.out.println(res.toString());
+	    	System.out.println("Test"+res.toString());
 	      }
 	    } catch (Exception e) {
 	      System.out.println(e);
@@ -88,6 +88,7 @@ public class LoginBean {
 	    }
 	    model.addAttribute("state");
 	    model.addAttribute("apiURL");
+	    model.addAttribute("res.toString()");
 		
 		return "/log/callback";
 	}
