@@ -89,13 +89,14 @@ body {
                      <label>Password</label>
                      <input type="password" class="form-control" placeholder="Password" name="pw">
                   </div>
-                  <button type="submit" class="btn btn-black">Login</button>                   
+                  <input type="submit" class="btn btn-black" value="Login"/>                
+               	<input type="button"class="btn btn-secondary" onclick="location='join.do'" value="Register"/>
+               	<a href="${url}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
                </form>
-               <button class="btn btn-secondary" onclick="location.href='join.do'">Register</button>
+               
             </div>
          </div>
       </div>
-
 
 </body>
 </html>
