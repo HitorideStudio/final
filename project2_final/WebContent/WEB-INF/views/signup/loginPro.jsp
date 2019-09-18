@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${c==1 }">
-	<c:redirect url="testloginout.do"/>
+	<c:redirect url="/map/welcome.do"/>
 </c:if>
 <c:if test="${c!=1}">
 	<script>

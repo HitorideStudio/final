@@ -15,16 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import project.member.vo.memberVO;
 
 @Controller
 @RequestMapping("/signup/")
 public class signup {
+	private NaverLoginBO naverLoginBO;
+	private String apiResult= null;
+	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
 	
 	@Autowired
 	private SqlSessionTemplate sql = null;
-	
+	//회원가입
 	@RequestMapping("join.do")
 	public String register() {
 		System.out.println(sql);
@@ -32,20 +39,16 @@ public class signup {
 	}
 	
 	@RequestMapping("joinPro.do")
-	public String joinPro(MultipartHttpServletRequest request,String id, String pw, String name) {
-	
-		System.out.println(id);
+	public String joinPro(MultipartHttpServletRequest request,String id, String pw, String name) throws Exception {
 		MultipartFile mf = request.getFile("img");
 		String path = request.getRealPath("imgs");
 		String org = mf.getOriginalFilename();
 		String ext = org.substring(org.lastIndexOf("."));
 		String img = id+ext;
 		File f = new File(path+"//"+img);
-		try {
-			mf.transferTo(f);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		
+		mf.transferTo(f);
+		img = "/project2_final/imgs/"+img;
 		memberVO vo= new memberVO();
 		vo.setId(id);
 		vo.setPw(pw);
@@ -57,6 +60,14 @@ public class signup {
 		
 		return "/signup/joinPro";
 	}
+	//네이버로 가입
+	@RequestMapping("joinPro2.do")
+	public String joinPro2(memberVO vo) {
+		sql.insert("member2.insertMember",vo);
+		return "/signup/joinPro2";
+	}
+	
+	//중복확인
 	@RequestMapping("confirmId.do")
 	public String confirmId(HttpServletRequest request, Model model){
 		String id = request.getParameter("id");
@@ -69,9 +80,13 @@ public class signup {
 		model.addAttribute("id",id);
 		return "/signup/confirmId";
 	}
-	
+	//로그인 네이버 추가
 	@RequestMapping("login.do")
-	public String login() {
+	public String login(Model model,HttpSession session) {
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		System.out.println("네이버:"+naverAuthUrl);
+		
+		model.addAttribute("url",naverAuthUrl);
 		return "/signup/login";
 	}
 	@RequestMapping("loginPro.do")
@@ -128,6 +143,7 @@ public class signup {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			img = "/project2_final/imgs/"+img;
 			vo.setImg(img);
 		}
 		sql.update("member2.updateModify",vo);
@@ -154,7 +170,14 @@ public class signup {
 		model.addAttribute("check",check);
 		return "/signup/deletePro";
 	}
-	
+	@RequestMapping("CheckSocial.do")
+	public String CheckSocial(memberVO vo,Model model,HttpSession session) {
+		int check = (Integer)sql.selectOne("member2.confirmId",vo.getId());
+		session.setAttribute("social", "1");
+		model.addAttribute("check",check);
+		model.addAttribute("vo",vo);
+		return "/signup/CheckSocial";
+	}
 	
 	
 	

@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<img src="/Final_project_2/imgs/${vo.img}" width="250"/><br/>
+
+<img src="${vo.img}" width="250"/><br/>
 <b>${sessionScope.memId }</b><br/>
 ${vo.name}
 

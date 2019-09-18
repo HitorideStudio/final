@@ -1,6 +1,7 @@
 package project_2.bean;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.HttpURLConnection;
@@ -22,7 +23,7 @@ public class LoginBean {
 	@RequestMapping("log.do")
 	public String Log(HttpSession session) throws Throwable {
 		   String clientId = "La0RtXyOJUt4BaBYv2rD";//애플리케이션 클라이언트 아이디값";
-		    String redirectURI = URLEncoder.encode("http://localhost:8080/Final_project_2/ex/callback.do", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://localhost:8080/project2_final/ex/callback.do", "UTF-8");
 		    SecureRandom random = new SecureRandom();
 		    String state = new BigInteger(130, random).toString();
 		    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -35,7 +36,7 @@ public class LoginBean {
 	}
 	
 	@RequestMapping("callback.do")
-	public String Callback(HttpServletRequest request) throws Throwable {
+	public String Callback(HttpServletRequest request, HttpSession session,Model model) throws Throwable {
 	    String clientId = "La0RtXyOJUt4BaBYv2rD";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "jJKnkNO4Yr";//애플리케이션 클라이언트 시크릿값";
 	    String code = request.getParameter("code");
@@ -57,7 +58,7 @@ public class LoginBean {
 	      con.setRequestMethod("POST");
 	      int responseCode = con.getResponseCode();
 	      BufferedReader br;
-	      System.out.print("responseCode="+responseCode);
+	      System.out.print("responseCode=시작"+responseCode +"끝");
 	      if(responseCode==200) { // 정상 호출
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
@@ -70,11 +71,24 @@ public class LoginBean {
 	      }
 	      br.close();
 	      if(responseCode==200) {
-	    	System.out.println(res.toString());
+	    	System.out.println("Test"+res.toString());
 	      }
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
+	 // 세션 또는 별도의 저장 공간에서 상태 토큰을 가져옴
+	    String storedState = (String)session.getAttribute("state");
+
+	    if( !state.equals( storedState ) ) {
+	        System.out.println("세션실패");
+	    	//return RESPONSE_UNAUTHORIZED; //401 unauthorized
+	    } else {
+	        System.out.println("세션성공");
+	    	//return RESPONSE_SUCCESS; //200 success
+	    }
+	    model.addAttribute("state");
+	    model.addAttribute("apiURL");
+	    model.addAttribute("res.toString()");
 		
 		return "/log/callback";
 	}
