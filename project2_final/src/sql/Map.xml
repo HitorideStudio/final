@@ -6,4 +6,7 @@
 	<select id="selectplacelist" resultType="vo">
 		select * from placelist
 	</select>
+	<select id="searchplacelist" parameterType="String" resultType="vo">
+		SELECT * FROM placelist WHERE address LIKE "%#{keyword}%";
+	</select>
 </mapper>
