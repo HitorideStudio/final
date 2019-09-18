@@ -25,7 +25,7 @@ public class Map {
 		List<PlaceListVO> list = sql.selectList("mapsql.selectplacelist");
 		
 		model.addObject("list",list);
-		model.setViewName("/finder/map");
+		model.setViewName("/map/map");
 		
 		return model;
 	}
@@ -38,7 +38,7 @@ public class Map {
 		ModelAndView model = new ModelAndView();
 		
 	
-		model.setViewName("/finder/cluster");
+		model.setViewName("/map/cluster");
 		return model;
 		
 	}

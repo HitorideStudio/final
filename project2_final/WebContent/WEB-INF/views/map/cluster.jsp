@@ -25,7 +25,8 @@
     </style>
 </head>
 <body>
-<div id="map" style="width:80%;height:800px;"></div>
+<div id="map" style="width:80%;height:690px; margin-left:10%;" ></div>
+<div id=""></div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -55,6 +56,7 @@ list.push("${list.lon}"); //list[i+1]
 list.push("${list.lat}"); //list[i+2]
 list.push("${list.address}"); //list[i+3]
 list.push("${list.tel}"); //list[i+4]
+list.push("${list.place}");//list[i+5]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
 
@@ -66,14 +68,14 @@ list.push("${list.tel}"); //list[i+4]
 		    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
 		    minLevel: 2 // 클러스터 할 최소 지도 레벨 
 		});
-
+   
 		
 		console.log(clusterer);
 		
 		var overlay = new Array();
-		  for(i=0;i<list.length;i+=5){
+		  for(i=0;i<list.length;i+=6){
 				 markers = new kakao.maps.Marker({
-		       		map: map, // 마커를 표시할 지도
+		       		map: map, // 마커를 표시할 지도 
 		        	position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
 		        	title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 		    	});
@@ -93,7 +95,7 @@ list.push("${list.tel}"); //list[i+4]
 			        '            <div class="desc">' + 
 			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
 			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+			        '                <div><a href="/project2_final/finder/info.do?&address='+list[i+3]+'&placename='+list[i]+'&place='+list[i+5]+'" target="_blank" class="link">홈페이지</a></div>' + 
 			        '            </div>' + 
 			        '        </div>' + 
 			        '    </div>' +    
@@ -108,6 +110,7 @@ list.push("${list.tel}"); //list[i+4]
 		    	  			
 
 		  }
+		   
 		   	function clickover(i){
 		   		overlay[i] = new kakao.maps.CustomOverlay({
 				    content: content,
@@ -119,12 +122,12 @@ list.push("${list.tel}"); //list[i+4]
 			  	    overlay[i].setMap(map);
 			  	});
 			}
-		  
+	
+	// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다	 
+</script>
+<script>
 
 
-
-	 
-	 
 </script>
 </body>
 </html>

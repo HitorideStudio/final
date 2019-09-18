@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,7 +19,7 @@ import project.member.vo.memberVO;
 
 
 @Controller
-@RequestMapping("/finder/")
+@RequestMapping("/map/")
 public class GoBean {
 	
 	//my batis db
@@ -28,7 +29,7 @@ public class GoBean {
 	@RequestMapping("main.do")
 	public String main() {
 		
-		return "/finder/main";
+		return "/map/main";
 	}
 	
 	@RequestMapping("info.do")
@@ -37,7 +38,7 @@ public class GoBean {
 		model.addObject("place",place);
 		model.addObject("placename",placename);
 		model.addObject("address",address);
-		model.setViewName("/finder/info");
+		model.setViewName("/map/info");
 		return model;
 	}
 

@@ -2,6 +2,7 @@ package rindb.bean;
 
 import java.util.List;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.rosuda.REngine.RList;
 import org.rosuda.REngine.Rserve.RConnection;

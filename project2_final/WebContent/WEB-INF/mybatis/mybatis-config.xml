@@ -13,5 +13,6 @@
 		<mapper resource="/sql/rindb.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
 		<mapper resource="/sql/member.xml"/>
+		<mapper resource="/sql/infoboard.xml"/>
 	</mappers>
 </configuration>
