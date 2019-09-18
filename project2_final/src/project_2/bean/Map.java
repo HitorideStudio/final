@@ -47,11 +47,11 @@ public class Map {
 	//search
 	@RequestMapping("search.do")
 	public ModelAndView search(String keyword) {
-		
+		List<PlaceListVO> list = null;
 		ModelAndView model = new ModelAndView();
-
-		List<PlaceListVO> list = sql.selectList("mapsql.selectplacelist");
-		List<PlaceListVO> list2 = sql.selectList("mapsql.searchplacelist", keyword);
+		if(keyword != null ) {
+			list = sql.selectList("mapsql.searchplacelist", keyword);
+		}
 		model.addObject("list",list);
 	
 		model.setViewName("/map/search");
@@ -59,3 +59,8 @@ public class Map {
 	}
 
 }
+
+
+
+
+

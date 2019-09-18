@@ -7,6 +7,11 @@
 		select * from placelist
 	</select>
 	<select id="searchplacelist" parameterType="String" resultType="vo">
-		SELECT * FROM placelist WHERE address LIKE "%#{keyword}%";
+		SELECT * FROM placelist
+		<trim prefix="where">
+			<if test="keyword!=null">
+				address LIKE '%#{keyword}%'
+			</if>
+		</trim>
 	</select>
 </mapper>
