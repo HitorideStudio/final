@@ -13,7 +13,7 @@
 
 <!--지도-->
 <div>
-	<jsp:include page="finder/cluster.jsp" />
+	<jsp:include page="map/cluster.jsp" />
 
 </div>
 </body>

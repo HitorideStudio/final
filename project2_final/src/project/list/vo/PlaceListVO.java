@@ -1,6 +1,6 @@
 package project.list.vo;
 
-public class PlaceList {
+public class PlaceListVO {
  private String placename;
  private String address;
  private String tel;
