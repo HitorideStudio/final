@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>Cluster Maker info</title>
     <style>
@@ -22,9 +23,27 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+    .glyphicon {
+              position: relative;
+              top: 1px;
+              display: block;
+              font-family: 'Glyphicons Halflings';
+              font-style: normal;
+              font-weight: normal;
+              line-height: 1;
+              font-size:2.3em;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;}
+    button{width:100px; height:60px; border:none; background:white; margin-left:50%;}
     </style>
 </head>
 <body>
+<div style="float:left;">
+      <button type="button" class="glyphicon glyphicon-search " onclick="" />
+      <button type="button" class="glyphicon glyphicon-share-alt " onclick="getLocation()" />
+      <button type="button" class="glyphicon glyphicon-star " onclick=""  />
+      <button type="button" class="glyphicon glyphicon-heart-empty " onclick=""  />
+</div>
 <div id="map" style="width:80%;height:690px; margin-left:10%;" ></div>
 <div id=""></div>
 <script
@@ -124,6 +143,20 @@ list.push("${list.place}");//list[i+5]
 			}
 	
 	// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다	 
+	 function getLocation() {
+           if (navigator.geolocation) {
+             navigator.geolocation.getCurrentPosition(showPosition);
+           } else { 
+             alert("Geolocation is not supported by this browser.");
+           }
+         }
+            function showPosition(position) {
+             var moveLatLon = new kakao.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                
+                // 지도 중심을 이동 시킵니다
+                map.setCenter(moveLatLon);
+               }
+	
 </script>
 <script>
 

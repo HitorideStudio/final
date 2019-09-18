@@ -112,12 +112,10 @@ body {
 				Kakao.API.request({
 					url : '/v1/user/me',
 					success : function(res) {
-						alert(res.properties.nickname + res.id + '환영합니다');
-						alert(res.kaccount_email + '이메일');
-						alert(res.properties.profile_image +"사진파일");
-						
+						//alert(res.properties.nickname + res.id + '환영합니다');
+						//alert(res.kaccount_email + '이메일');
+						//alert(res.properties.profile_image +"사진파일");
 						console.log(res);
-
 						var pw = res.id; //유저의 카카오톡 고유 id
 						var id = res.kaccount_email; //유저의 이메일
 						var name = res.properties.nickname; //유저가 등록한 별명
