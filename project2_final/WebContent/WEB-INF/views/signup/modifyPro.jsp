@@ -9,7 +9,7 @@
 <body>
 <script>
 	alert("수정완료");
-	window.location="testloginout.do";
+	window.location="/project2_final/map/welcome.do";
 </script>
 </body>
 </html>

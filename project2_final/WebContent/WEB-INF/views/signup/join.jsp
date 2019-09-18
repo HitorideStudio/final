@@ -125,7 +125,7 @@ body {
 	name="userinput" onSubmit="return checkIt()">
 	<div class="form-group">
  		<label>아이디</label>
- 		<input class="form-control" type ="text" name="id"/>
+ 		<input class="form-control" type ="text" name="id" placeholder="이메일형식으로 입력하세요"/>
  		<input  type="button" name="confirm_id" value="ID중복확인" 
         							OnClick="openConfirmid(this.form)"><br/>
     </div>
@@ -147,7 +147,7 @@ body {
  		</div>
  	<input type="submit" class="btn btn-black" value="가입"/>
  	<input type="reset" class="btn btn-black" name="reset" value="다시입력">
-    <input type="button" class="btn btn-black" value="가입안함" onclick="javascript:window.location='/project2_final/finder/main.do'">
+    <input type="button" class="btn btn-black" value="가입안함" onclick="javascript:window.location='/project2_final/map/welcome.do'">
  	<br/>
  </form>
  </div>

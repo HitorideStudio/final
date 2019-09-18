@@ -15,7 +15,7 @@
 		
 	</script>
 	
-	<c:redirect url="/finder/main.do"></c:redirect>
+	<c:redirect url="/map/welcome.do"></c:redirect>
 </c:if>
 
 <c:if test="${check!=1}">

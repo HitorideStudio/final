@@ -1,6 +1,7 @@
 package project_2.bean;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,7 +81,8 @@ public class signup {
 		model.addAttribute("id",id);
 		return "/signup/confirmId";
 	}
-	//로그인 네이버 추가
+	
+	//로그인 네이버 추가 + 카카오로그인은 자바스크립트로 추가
 	@RequestMapping("login.do")
 	public String login(Model model,HttpSession session) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -100,11 +103,13 @@ public class signup {
 		model.addAttribute("c",c);
 		return "/signup/loginPro";	
 	}
+	//로그아웃
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		return "/signup/logout";
 	}
+	//테스트페이지==>삭제 예정
 	@RequestMapping("testloginout.do")
 	public String testloginout(HttpSession session,Model model) {
 		String id = (String)session.getAttribute("memId");
@@ -112,6 +117,7 @@ public class signup {
 		model.addAttribute("vo",vo);
 		return "/signup/testloginout";
 	}
+	//회원정보 수정
 	@RequestMapping("modify.do")
 	public String modify(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("memId");
@@ -148,6 +154,7 @@ public class signup {
 		sql.update("member2.updateModify",vo);
 		return "/signup/modifyPro";
 	}
+	//회원정보 삭제
 	@RequestMapping("delete.do")
 	public String delete() {
 		return "/signup/delete";
@@ -169,19 +176,29 @@ public class signup {
 		model.addAttribute("check",check);
 		return "/signup/deletePro";
 	}
-	@RequestMapping("CheckSocial.do")
-	public String CheckSocial(memberVO vo,Model model,HttpSession session) {
-		int check = (Integer)sql.selectOne("member2.confirmId",vo.getId());
-		session.setAttribute("social", "1");
-		model.addAttribute("check",check);
-		model.addAttribute("vo",vo);
-		return "/signup/CheckSocial";
+	
+	//네이버로 사용자 값 받아오는 로직
+	@RequestMapping("callback.do")
+	public String callback(Model model,@RequestParam String code, @RequestParam String state, HttpSession session,memberVO vo) throws IOException{
+		System.out.println("여기는 signup callback");
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		// 로그인 사용자 정보 읽어오기
+		apiResult = naverLoginBO.getUserProfile(oauthToken);
+		model.addAttribute("result",apiResult);
+		
+		return "/signup/naverSuccess";
 	}
+	//네이버아이디로 회원가입 및 로그인 
+		@RequestMapping("CheckSocial.do")
+		public String CheckSocial(memberVO vo,Model model,HttpSession session) {
+			int check = (Integer)sql.selectOne("member2.confirmId",vo.getId());
+			session.setAttribute("social", "1");
+			model.addAttribute("check",check);
+			model.addAttribute("vo",vo);
+			return "/signup/CheckSocial";
 	
-	
-	
-	
-	
+		}
 	
 	
 	

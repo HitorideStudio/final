@@ -1,6 +1,7 @@
 package project_2.bean;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,8 @@ public class kakaologin {
 		return "/log/login_k";
 	}
 	@RequestMapping("loginPro_k.do")
-	public String loginPro_k(@RequestParam("code")String code) {
+	public String loginPro_k(@RequestParam("code")String code,HttpSession session) {
+		
 		System.out.println("code:"+code);
 		
 		return "/log/loginPro_k";

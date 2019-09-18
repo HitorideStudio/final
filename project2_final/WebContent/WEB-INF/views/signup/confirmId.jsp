@@ -28,7 +28,7 @@
   <tr>
     <td align="center"> 
        다른 아이디를 선택하세요.<p>
-       <input type="text" size="10" maxlength="12" name="id"> 
+       <input type="text" size="10" maxlength="25" name="id"> 
        <input type="submit" value="ID중복확인">
     </td>
   </tr>

@@ -26,19 +26,21 @@
 				Kakao.API.request({
 					url : '/v1/user/me',
 					success : function(res) {
-						alert(res.properties.nickname + '환영합니다');
-						location.href = "loginPro_k.do?code="
-								+ authObj.access_token;
+						alert(res.properties.nickname + res.id + '환영합니다');
+						alert(res.kaccount_email + '이메일');
+						alert(res.properties.profile_image +"사진파일");
+						
 						console.log(res);
 
-						var userID = res.id; //유저의 카카오톡 고유 id
-						var userEmail = res.kaccount_email; //유저의 이메일
-						var userNickName = res.properties.nickname; //유저가 등록한 별명
+						var pw = res.id; //유저의 카카오톡 고유 id
+						var id = res.kaccount_email; //유저의 이메일
+						var name = res.properties.nickname; //유저가 등록한 별명
+						var img = res.properties.profile_image; // 유저가 등록한 프로필 사진
 
-						console.log(userID);
-						console.log(userEmail);
-						console.log(userNickName);
 						console.log(authObj.access_token);
+						//location.href = "loginPro_k.do?code="
+							//+ authObj.access_token;
+						location=  "/project2_final/signup/CheckSocial.do?id="+id+"&pw="+pw+"&img="+img+"&name="+name;
 
 					},
 					fail : function(err) {
@@ -54,8 +56,7 @@
 
 		//]]>
 	</script>
-
-
+	
 
 </body>
 </html>

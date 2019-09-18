@@ -67,7 +67,10 @@ body {
     background-color: #000 !important;
     color: #fff;
 }
-
+.btn-red{
+    background-color: #000 !important;
+    color: red;
+}
 </style>
 </head>
 <body>
@@ -99,6 +102,7 @@ body {
  	</div>
  	<input type="hidden" name="org" value="${vo.img}"/><br/>
  	<input class="btn btn-black" type="submit" value="수정하기"/>
+ 	<input type="button"class="btn btn-red" onclick="window.location='delete.do'" value="탈퇴하기"/>
  	<input type="button"class="btn btn-secondary" onclick="location='/project2_final/map/welcome.do'" value="홈으로"/>
  	
 </form>

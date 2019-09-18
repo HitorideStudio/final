@@ -9,7 +9,7 @@
 <body>
 <script >
 	alert("가입완료");
-	window.location="../finder/main.do";
+	window.location="/project2_final/signup/login.do";
 </script>
 </body>
 </html>

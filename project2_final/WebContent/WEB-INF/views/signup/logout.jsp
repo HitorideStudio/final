@@ -2,5 +2,5 @@
     pageEncoding="EUC-KR"%>
 <script>
 	alert("Àß°¡");
-	window.location="../finder/main.do";
+	window.location="/project2_final/map/welcome.do";
 </script>
