@@ -6,7 +6,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.list.vo.PlaceListVO;
@@ -26,7 +30,7 @@ public class Map {
 		
 		ModelAndView model = new ModelAndView();
 		
-		List<PlaceListVO> list = sql.selectList("mapsql.selectplacelist");
+		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist");
 
 		model.addObject("list",list);
 
@@ -45,18 +49,30 @@ public class Map {
 	}
 	
 	//search
-	@RequestMapping("search.do")
-	public ModelAndView search(String keyword) {
-		List<PlaceListVO> list = null;
-		ModelAndView model = new ModelAndView();
-		if(keyword != null ) {
-			list = sql.selectList("mapsql.searchplacelist", keyword);
-		}
-		model.addObject("list",list);
 	
+	@RequestMapping(value="search.do",method = RequestMethod.GET)
+	public ModelAndView search(@RequestParam(value="keyword", required=false) String keyword) {
+		
+		System.out.println(keyword);
+		ModelAndView model = new ModelAndView();
+	
+		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist",keyword);
+		model.addObject("list",list);
+		
 		model.setViewName("/map/search");
 		return model;
 	}
+	
+	@RequestMapping("form.do")
+	public ModelAndView form() {
+		
+		ModelAndView model = new ModelAndView();
+		
+		model.setViewName("/map/form");
+		return model;
+	}
+	
+	
 
 }
 
