@@ -1,5 +1,6 @@
 package project_2.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -53,11 +54,8 @@ public class Map {
 	@RequestMapping(value="search.do",method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam(value="keyword", required=false) String keyword) {
 		
-		System.out.println(keyword);
+		
 		ModelAndView model = new ModelAndView();
-	
-		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist",keyword);
-		model.addObject("list",list);
 		
 		model.setViewName("/map/search");
 		return model;
@@ -72,6 +70,28 @@ public class Map {
 		return model;
 	}
 	
+	@RequestMapping(value="markerdata.do",method = RequestMethod.POST)
+	public ModelAndView markerdata(@RequestParam(value="keyword", required=false) String keyword) {
+		int i;
+		List Address = new ArrayList();
+		ModelAndView model = new ModelAndView();
+		System.out.println(keyword);
+		if(keyword!=null) {
+		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist",keyword);
+		
+		for(PlaceListVO vo : list) {
+		System.out.println(vo.getAddress());
+			Address.add(vo.getAddress());
+		}
+		System.out.println(Address);
+		model.addObject("list",list);
+		}else {
+			List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist");
+			model.addObject("list",list);	
+		}
+		model.setViewName("/map/markerdata");
+		return model;
+	}
 	
 
 }

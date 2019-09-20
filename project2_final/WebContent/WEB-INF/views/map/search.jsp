@@ -47,25 +47,28 @@
 </style>
 </head>
 <body>
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
+	
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
-                	<form >
-                    키워드 : <input type="text" name="keyword" id="keyword" size="15"> 
-                    <button onclick="searchPlaces()">검색하기</button> 
+                	<form>
+                    주소로찾기 : <input type="text" name="keyword" id="keyword" size="15"> 
+                    <button onclick="searchPlaces(); return false;">검색하기</button> 
+
         			</form>
-</div>
-               </form>
+        			 <button onclick="removeMarker(); return false;">마커삭제</button>
+        			<button onclick="allmarker(); return false;">전체보기</button>
+        	</div>
             </div>
         </div>
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-</div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e0cc7f923dfb2d33aa1685a125ad6cb&libraries=services"></script>
 <script>
@@ -81,51 +84,46 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-// 키워드 검색을 요청하는 함수입니다
-function searchPlaces() {
-	var placename = new Array();
-	var address = new Array();
-	var tel = [];
-	var lon = [];
-	var lat = [];
-	var place = [];
-    var keyword = document.getElementById('keyword').value;
-   
-   
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
+// 마커포지션
+var positions = [
+    {
+        title: [],
+        latlng: []
     }
-    $.ajax({
-	        url:'search.do',
-	        type:'get',
-	        data: {keyword:$("#keyword").val()},
-	        success:function(data){
-	        	
-	        	<c:forEach items="${list}" var="list">
-	            placename.push("${list.placename}");
-	        	address.push("${list.address}");
-	        	tel.push("${list.tel}");
-	        	lat.push("${list.lat}");
-	        	lon.push("${list.lon}");
-	        	place.push("${list.place}");
-	        	</c:forEach>        
-	        	alert(placename[1]);
-	        	},
-	        error:function(data){
-	          alert("에러");
-	        }
+];
+// 키워드 검색을 요청하는 함수입니다
+// 리스트를받아옴 
+function searchPlaces(){
+	 var keyword = document.getElementById('keyword').value;
+
+	    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+	        alert('키워드를 입력해주세요!');
+	        return false;
+	    }
+	    $.ajax({
+	        type : 'post',
+	        url : 'markerdata.do',
+	        data : {keyword:$("#keyword").val() },
+	        dataType:'json',
+	        success : function(data) { 
+		    
+
+	        	}
+	        
 	    });
+    }
+
+//마커를지움
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+function allmarker(){
+	
 }
 
-for(i=0;i<placename.length;i++){
-    
-	marker = new kakao.maps.Marker({
-  	map: map, // 마커를 표시할 지도 
-   	position: new kakao.maps.LatLng(lat[i],lon[i]), // 마커를 표시할 위치
-   	title : placename[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-	});
-}
 </script>
 </body>
 </html>
