@@ -87,6 +87,7 @@ list.push("${list.place}");//list[i+5]
 		    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
 		    minLevel: 2 // 클러스터 할 최소 지도 레벨 
 		});
+	
    
 		
 		console.log(clusterer);
@@ -155,7 +156,7 @@ list.push("${list.place}");//list[i+5]
                 
                 // 지도 중심을 이동 시킵니다
                 map.setCenter(moveLatLon);
-               }
+            }
 	
 </script>
 <script>
