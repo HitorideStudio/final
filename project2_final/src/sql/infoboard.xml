@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="infoboard">
-	<insert id="write" parameterType="vo">
-		
+	<insert id="write" parameterType="reply">
+		insert into infoboardreply values(infoboardreply_seq.nextval,#{i_shop},#{i_id},#{i_content},sysdate,#{i_img},#{i_placename})
 	</insert>
+	
 </mapper>
