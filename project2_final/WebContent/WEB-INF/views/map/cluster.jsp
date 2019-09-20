@@ -115,7 +115,7 @@ list.push("${list.place}");//list[i+5]
 			        '            <div class="desc">' + 
 			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
 			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a href="/project2_final/finder/info.do?&address='+list[i+3]+'&placename='+list[i]+'&place='+list[i+5]+'" target="_blank" class="link">홈페이지</a></div>' + 
+			        '                <div><a href="/project2_final/memberBoard/write.do?&number='+list[i+4]+'&placename='+list[i]+'&place='+list[i+5]+'" target="_blank" class="link">홈페이지</a></div>' + 
 			        '            </div>' + 
 			        '        </div>' + 
 			        '    </div>' +    

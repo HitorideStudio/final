@@ -7,6 +7,7 @@
 		<typeAlias alias="vo" type="project.list.vo.PlaceListVO"/>
 		<typeAlias alias="tv" type="project.list.vo.TestVO"/>
 		<typeAlias alias="member" type="project.member.vo.memberVO"/>
+		<typeAlias alias="memberBoard" type="project.member.vo.memberBoardVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="/sql/Map.xml"/>
@@ -14,5 +15,6 @@
 		<mapper resource="/sql/testSQL.xml"/>
 		<mapper resource="/sql/member.xml"/>
 		<mapper resource="/sql/infoboard.xml"/>
+		<mapper resource="/sql/memberBoard.xml"/>
 	</mappers>
 </configuration>
