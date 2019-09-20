@@ -6,5 +6,14 @@
 	<insert id="write" parameterType="reply">
 		insert into infoboardreply values(infoboardreply_seq.nextval,#{i_shop},#{i_id},#{i_content},sysdate,#{i_img},#{i_placename})
 	</insert>
+	<!-- 클릭 마커의 댓글수 -->
+	<select id="count" parameterType="String" resultType="int">
+		select count(*) from infoboardreply where i_shop=#{number}
+	</select>
+	<select id="replylist" parameterType="map" resultType="vo">
+		select i_num,i_shop,i_id,i_content,i_reg,i_img,i_placename,r 
+		<![CDATA[from(select i_num,i_shop,i_id,i_content,i_reg,i_img,i_placename,rownum r 
+		from(select * from infoboardreply where i_shop=#{number} order by i_reg desc)order by i_reg desc)where r>#{startRow} and r<=#{endRow}]]>
+	</select>
 	
 </mapper>
