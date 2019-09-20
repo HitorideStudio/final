@@ -85,12 +85,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 // 마커포지션
-var positions = [
-    {
-        title: [],
-        latlng: []
-    }
-];
+var positions = "";
 // 키워드 검색을 요청하는 함수입니다
 // 리스트를받아옴 
 function searchPlaces(){
@@ -101,15 +96,11 @@ function searchPlaces(){
 	        return false;
 	    }
 	    $.ajax({
-	        type : 'post',
 	        url : 'markerdata.do',
-	        data : {keyword:$("#keyword").val() },
-	        dataType:'json',
+	        dataType : 'json',
 	        success : function(data) { 
-		    
-
-	        	}
-	        
+				alert(data);
+	        }
 	    });
     }
 
@@ -121,7 +112,8 @@ function removeMarker() {
     markers = [];
 }
 function allmarker(){
-	
+	alert(positions);
+
 }
 
 </script>
