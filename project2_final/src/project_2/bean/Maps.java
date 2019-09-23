@@ -1,3 +1,4 @@
+package project_2.bean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import project.list.vo.PlaceListVO;
 
-@RestController
+@Controller
 @RequestMapping("/map/")
 public class Maps {
 	
@@ -61,29 +63,7 @@ public class Maps {
 		model.setViewName("/map/search");
 		return model;
 	}
-	
-	
-	
-	
-	
-	
-	@RequestMapping("form.do")
-	public ModelAndView form() {
-		
-		ModelAndView model = new ModelAndView();
-		
-		model.setViewName("/map/form");
-		return model;
-	}
-	
-	@RequestMapping("pros.do")
-	public ModelAndView maka() {
-		
-		ModelAndView model = new ModelAndView();
-		
-		model.setViewName("/map/pros");
-		return model;
-	}
+
 	
 	@RequestMapping(value="markerdata.do")
 	public  @ResponseBody Object markerdata(HttpServletRequest request) {
@@ -112,5 +92,9 @@ public class Maps {
 		return jsonArray;
 	}
 	
+	@RequestMapping(value="korr.do")
+	public String korr() {
+		return "/map/korr";
+	}
 
 }

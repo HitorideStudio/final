@@ -108,4 +108,5 @@ public class Infoboard {
 		return "/infoboard/writePro";
 	}
 	
+
 }
