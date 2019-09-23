@@ -1,7 +1,9 @@
 package project_2.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -65,36 +67,27 @@ public class Maps {
 	}
 
 	
-	@RequestMapping(value="markerdata.do")
-	public  @ResponseBody Object markerdata(HttpServletRequest request) {
+	@RequestMapping(value="markerdata.do",  produces = "application/json")
+	public @ResponseBody List<PlaceListVO> markerdata(@RequestParam(value="keyword", required=false) String keyword) {
 		
-		String keyword = request.getParameter("keyword");
-		System.out.println("ajax data===>>"+keyword);
-		JSONArray jsonArray = new JSONArray();
-		JSONObject jsonObject = new JSONObject();
-		HashMap<String, Object> map = new HashMap<String , Object>();
+		
 		List<PlaceListVO> list =null;
 		if(keyword!=null) {
 			System.out.println(keyword);
 			list = sql.selectList("mapsql.searchplacelist",keyword);
-		
-			for(PlaceListVO vo : list) {
-				jsonObject.put("title", vo.getPlacename());
-				jsonObject.put("latlng", "new kakao.maps.LatLng("+vo.getLat()+","+vo.getLon()+")");
-				jsonObject.put("address",vo.getAddress());
-				jsonObject.put("tel",vo.getTel());
-				jsonObject.put("place",vo.getPlace());
-				jsonArray.add(jsonObject);
-			}
 		}		
-		System.out.println(jsonArray);
-		
-		return jsonArray;
+
+		return list;
 	}
 	
-	@RequestMapping(value="korr.do")
-	public String korr() {
-		return "/map/korr";
-	}
 
+	
+	@RequestMapping(value="dataAll.do",  produces = "application/json")
+	public @ResponseBody List<PlaceListVO> dataAll() {
+		
+			List<PlaceListVO> list =null;
+			list = sql.selectList("mapsql.searchplacelist");
+		
+		return list;
+	}
 }
