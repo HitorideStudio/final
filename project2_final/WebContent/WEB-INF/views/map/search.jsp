@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
    <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -71,6 +71,8 @@
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e0cc7f923dfb2d33aa1685a125ad6cb&libraries=services"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -83,12 +85,13 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
-
+var placelist = [];
 // 마커포지션
 var positions = "";
 // 키워드 검색을 요청하는 함수입니다
 // 리스트를받아옴 
 function searchPlaces(){
+		
 	 var keyword = document.getElementById('keyword').value;
 
 	    if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -96,10 +99,11 @@ function searchPlaces(){
 	        return false;
 	    }
 	    $.ajax({
-	        url : 'markerdata.do',
-	        dataType : 'json',
+	        url :'test2.do',
+	        data:{keyword:$("#keyword").val()},
+	        type : "json",
 	        success : function(data) { 
-				alert(data);
+				console.log(data);
 	        }
 	    });
     }

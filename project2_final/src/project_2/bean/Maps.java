@@ -1,6 +1,4 @@
-package project_2.bean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,8 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +19,7 @@ import project.list.vo.PlaceListVO;
 
 @RestController
 @RequestMapping("/map/")
-public class Map {
+public class Maps {
 	
 	//my batis db
 		@Autowired
@@ -59,13 +55,17 @@ public class Map {
 	@RequestMapping(value="search.do",method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam(value="keyword", required=false) String keyword) {
 		
-		
 		ModelAndView model = new ModelAndView();
 		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist",keyword);
 		model.addObject("list", list);
 		model.setViewName("/map/search");
 		return model;
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("form.do")
 	public ModelAndView form() {
@@ -76,6 +76,14 @@ public class Map {
 		return model;
 	}
 	
+	@RequestMapping("pros.do")
+	public ModelAndView maka() {
+		
+		ModelAndView model = new ModelAndView();
+		
+		model.setViewName("/map/pros");
+		return model;
+	}
 	
 	@RequestMapping(value="markerdata.do")
 	public  @ResponseBody Object markerdata(HttpServletRequest request) {
@@ -104,18 +112,5 @@ public class Map {
 		return jsonArray;
 	}
 	
-	@RequestMapping(value="test2.do")
-	@ResponseBody
-	public HashMap<String, Object> test(){
-	    	HashMap<String, Object> map = new HashMap<String, Object>();
-	    	map.put("1", "111");
-	    	map.put("2", 222);
-	    	return map;
-	    }
 
 }
-
-
-
-
-

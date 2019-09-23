@@ -18,8 +18,6 @@
 
 	<context:component-scan base-package="project_2.bean"/>
 	
-	
-    
 
 	<!-- in db bean con -->
 	<bean id="rindb" class="rindb.bean.Rindb"/>
