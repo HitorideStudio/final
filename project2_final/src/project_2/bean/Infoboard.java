@@ -77,20 +77,20 @@ public class Infoboard {
 	public String writePro(MultipartHttpServletRequest request,String i_shop,
 			String i_id,String i_content, String i_placename,Model model) throws Exception{
 		
-		MultipartFile mf =null;
 		
-		String i_img = "notpicture";
-		
-		if(mf!=null) {
-		mf = request.getFile("i_img");
-		
-		String path = request.getRealPath("imgs");
+		MultipartFile mf = request.getFile("i_img");
 		String org = mf.getOriginalFilename();
+		String i_img = null;
+		
+		if(org!=null) {
+		String path = request.getRealPath("imgs");
 		i_img = org;
 		File f = new File(path+"//"+i_img);
 		
 		mf.transferTo(f);
 		i_img = "/project2_final/imgs/"+i_img;
+		}else {
+			i_img = "notpicture";
 		}
 	
 		
@@ -105,7 +105,7 @@ public class Infoboard {
 		model.addAttribute("i_placename",i_placename);
 		
 		
-		return "/infoboard/writePro";
+		return "/infoboard/writeForm";
 	}
 	
 
