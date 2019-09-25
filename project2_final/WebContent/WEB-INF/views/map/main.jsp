@@ -4,11 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인테스트</title>
+<title>메인페이지</title>
 </head>
 <body>
 테스트페이지
-<button onclick="window.location='/Final_project_2/signup/login.do'">로그인</button>
+<button onclick="window.location='/project2_final/map/welcome.do'">Go!</button>
+	<form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" name="keyword" id="keyword"> 
+                    <button type="submit">검색하기</button> 
+                </form>
 
 
 </body>

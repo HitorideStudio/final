@@ -30,6 +30,14 @@ public class Infoboard {
 	public String writeForm(HttpServletRequest request,HttpSession session,
 			String place,String placename,String number, Model model) {
 		System.out.println(number);
+		String id = (String)session.getAttribute("memId");
+		//내가 쓴글 카운트
+		HashMap replycount = new HashMap();
+		replycount.put("i_id",id);
+		replycount.put("i_shop",number);
+		
+		int rcount = (Integer)sql.selectOne("infoboard.countId", replycount);
+		
 		//댓글 카운트
 		int count = (Integer)sql.selectOne("infoboard.count",number);
 		System.out.println(count);
@@ -67,22 +75,20 @@ public class Infoboard {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("pageCount",pageCount);
-		
-		
+		model.addAttribute("rcount",rcount);
 		
 		return "/infoboard/writeForm";
 	}
 	
 	@RequestMapping("writePro.do")
 	public String writePro(MultipartHttpServletRequest request,String i_shop,
-			String i_id,String i_content, String i_placename,Model model) throws Exception{
-		
+		String i_id,String i_content, String i_placename,Model model) throws Exception{
 		
 		MultipartFile mf = request.getFile("i_img");
 		String org = mf.getOriginalFilename();
 		String i_img = null;
 		
-		if(org!=null) {
+		if(org!="") {
 		String path = request.getRealPath("imgs");
 		i_img = org;
 		File f = new File(path+"//"+i_img);
@@ -92,21 +98,25 @@ public class Infoboard {
 		}else {
 			i_img = "notpicture";
 		}
-	
-		
 		InfoboardVO vo = new InfoboardVO();
 		vo.setI_id(i_id);
 		vo.setI_shop(i_shop);
 		vo.setI_content(i_content);
 		vo.setI_img(i_img);
 		vo.setI_placename(i_placename);
-		
 		sql.insert("infoboard.write",vo);
 		model.addAttribute("i_placename",i_placename);
 		
-		
 		return "/infoboard/writeForm";
 	}
+	//리뷰 삭제
+	@RequestMapping("deleteForm.do")
+	public String deleteForm(int num) {
+		System.out.println(num);
+		sql.delete("infoboard.delete",num);
+		return "/infoboard/writeForm";
+	}
+	
 	
 
 }
