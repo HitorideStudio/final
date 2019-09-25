@@ -33,6 +33,14 @@ public class signup {
 	
 	@Autowired
 	private SqlSessionTemplate sql = null;
+	//메인페이지
+	@RequestMapping("main.do")
+	public String main() {
+		System.out.println(sql);
+		return "/map/main";
+	}
+	
+	
 	//회원가입
 	@RequestMapping("join.do")
 	public String register() {
