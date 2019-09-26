@@ -20,7 +20,7 @@
 </section>
 
 <!-- Band Description -->
-<section class="w3-container w3-center w3-content" style="max-width:600px">
+<section class="w3-container w3-center w3-content" style="max-width:100%" align="center">
   <a href="/project2_final/map/welcome.do">
   <h2 class="w3-wide">GO</h2>
   </a>
@@ -33,6 +33,7 @@
 
 
 <!-- Footer -->
+<div align="center">
 <footer class="w3-container w3-padding-64 w3-center w3-black w3-xlarge">
   <a href="https://www.facebook.com/"><i class="fa fa-facebook-official"></i></a>
   
@@ -40,7 +41,7 @@
   
   
 </footer>
-
+</div>
 <script>
 // Automatic Slideshow - change image every 3 seconds
 var myIndex = 0;

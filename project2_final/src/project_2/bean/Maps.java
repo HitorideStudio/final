@@ -98,30 +98,32 @@ public class Maps {
 	}
 	
 	@RequestMapping("wishlist.do")
-	   public String wishlist(HttpSession session,Model model,String id,String no,FavoVO vo,memberVO vo2) {
+	   public String wishlist(HttpSession session,Model model,String id,String no,FavoVO fvo,memberVO vo2,String placename) {
 	      Date date = new Date();
 	      id = (String)session.getAttribute("memId");
-	      vo = new FavoVO();
-	      vo.setDate(date);
-	      vo.setMember_id(id);
-	      vo.setInfo_id(no);
-	      vo.setFavo_id(1);
+	      fvo = new FavoVO();
+	      fvo.setDate(date);
+	      fvo.setMember_id(id);
+	      fvo.setPlacename(placename);
+	      fvo.setInfo_id(no);
+	      fvo.setFavo_id(1);
 	      System.out.println(id);
 	      System.out.println(no);
-	      int num = (Integer)sql.selectOne("mapsql.wishcheck",vo);
+	      System.out.println(placename);
+	      int num = (Integer)sql.selectOne("mapsql.wishcheck",fvo);
 	      System.out.println(num);
 	       if(num == 0) {
-	         sql.insert("mapsql.wishadd",vo);
+	         sql.insert("mapsql.wishadd",fvo);
 	         System.out.println("이제 너는 나의 favorite.");
 	      }else {
-	         sql.delete("mapsql.deletewish",vo);
+	         sql.delete("mapsql.deletewish",fvo);
 	         System.out.println("우리 이제 헤어지자.");
 	      }
-	       List favolist = sql.selectList("mapsql.wishrem",vo);
+	       List <FavoVO>favolist = sql.selectList("mapsql.wishrem",fvo);
 	       System.out.println(num);
 	       System.out.println(favolist);
 	       model.addAttribute("num",num); 
-	       model.addAttribute("vo",vo); 
+	       model.addAttribute("vo",fvo); 
 	       model.addAttribute("no",no);
 	       model.addAttribute("favolist",favolist); 
 	       return "/map/wishlist";
@@ -130,11 +132,11 @@ public class Maps {
 	 @RequestMapping("del.do")
 	   public String del(HttpSession session,String id,String num) {
 	      id = (String)session.getAttribute("memId");
-	      FavoVO vo = new FavoVO();
-	      vo.setMember_id(id);
-	      vo.setInfo_id(num);
+	      FavoVO fvo = new FavoVO();
+	      fvo.setMember_id(id);
+	      fvo.setPlacename(num);
 	      System.out.println(num);
-	      sql.delete("mapsql.deletewish",vo);
+	      sql.delete("mapsql.deletewish",fvo);
 	      return "/map/wishlist";
 	   }
 }

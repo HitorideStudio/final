@@ -8,6 +8,7 @@
 		<typeAlias alias="tv" type="project.list.vo.TestVO"/>
 		<typeAlias alias="member" type="project.member.vo.memberVO"/>
 		<typeAlias alias="reply" type="project.list.vo.InfoboardVO"/>
+		<typeAlias alias="fvo" type="project.list.vo.FavoVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="/sql/Map.xml"/>
