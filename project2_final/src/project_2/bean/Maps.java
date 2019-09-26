@@ -37,7 +37,7 @@ public class Maps {
 		ModelAndView model = new ModelAndView();
 		
 		List<PlaceListVO> list = sql.selectList("mapsql.searchplacelist");
-
+		System.out.println(list);
 		model.addObject("list",list);
 
 		model.setViewName("welcome");
