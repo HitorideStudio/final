@@ -131,16 +131,13 @@ var clusterer = new kakao.maps.MarkerClusterer({
 });
 function allMarker(){
 	 $.ajax({
-	        url :'markerdata.do',
-	        data:{keyword:$("#keyword").val()},
+	        url :'dataAll.do',	      
 	        dataType:'json',
 	        success : function(data) { 
-				if(data==""){
-					alert("검색결과가없습니다.");
-					}else{
+				
 						
 						placesSearchCB(data);
-						}
+						
 					}
 	    });
 	
