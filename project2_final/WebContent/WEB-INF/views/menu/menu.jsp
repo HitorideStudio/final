@@ -21,7 +21,6 @@
   	<c:otherwise>
    		<a class="dropdown-item" href="/project2_final/signup/modify.do">info</a>
    		<a class="dropdown-item" href="/project2_final/signup/logout.do" >logout</a>
-   		<a class="dropdown-item" href="/project2_final/memberBoard/write.do" >board</a>
   	</c:otherwise>
   	</c:choose>  
   </div>

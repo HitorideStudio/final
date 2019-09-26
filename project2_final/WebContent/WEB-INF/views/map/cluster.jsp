@@ -41,10 +41,10 @@
 </head>
 <body>
 <div style="float:left;">
-      <button type="button" class="glyphicon glyphicon-search " onclick="" />
-      <button type="button" class="glyphicon glyphicon-share-alt " onclick="getLocation()" />
-      <button type="button" class="glyphicon glyphicon-star " onclick=""  />
-      <button type="button" class="glyphicon glyphicon-heart-empty " onclick=""  />
+      <button type="button" class="glyphicon glyphicon-search " onclick="search()" ></button>
+      <button type="button" class="glyphicon glyphicon-share-alt " onclick="getLocation()" ></button>
+      <button type="button" class="glyphicon glyphicon-star " onclick=""  ></button>
+      <button type="button" class="glyphicon glyphicon-heart-empty " onclick=""  ></button>
 </div>
 <div id="map" style="width:80%;height:690px; margin-left:10%;" ></div>
 <div id=""></div>
@@ -166,6 +166,10 @@ list.push("${list.place}");//list[i+5]
      //마커안에 리뷰 클릭했을 때
 	function reply(number,placename,place){
 		window.open("/project2_final/infoboard/writeForm.do?&number="+number+"&placename="+placename+"&place="+place,"window","width=800,height=800,left=600,location=no");
+		}
+	//서치로 이동
+	function search(){
+		location = "/project2_final/map/search.do";
 		}
 	
 </script>

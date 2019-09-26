@@ -32,12 +32,14 @@ public class Infoboard {
 		System.out.println(number);
 		String id = (String)session.getAttribute("memId");
 		//내가 쓴글 카운트
+		if(id!=null) {
 		HashMap replycount = new HashMap();
 		replycount.put("i_id",id);
 		replycount.put("i_shop",number);
 		
 		int rcount = (Integer)sql.selectOne("infoboard.countId", replycount);
-		
+		model.addAttribute("rcount",rcount);
+		}
 		//댓글 카운트
 		int count = (Integer)sql.selectOne("infoboard.count",number);
 		System.out.println(count);
@@ -75,7 +77,7 @@ public class Infoboard {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("pageCount",pageCount);
-		model.addAttribute("rcount",rcount);
+		
 		
 		return "/infoboard/writeForm";
 	}
