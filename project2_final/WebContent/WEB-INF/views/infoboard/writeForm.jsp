@@ -42,6 +42,11 @@
 			});
 		}
 	}
+	function reflesh(){
+		opener.location.href="/project2_final/signup/login.do";
+		window.close();
+		
+	}
 </script>
 <style>
 /* Header/Logo Title */
@@ -104,7 +109,7 @@
 	<!-- 댓글 입력 폼 -->
 	<c:choose>
 		<c:when test="${sessionScope.memId==null }">
-			<input type="button" value="로그인 후 댓글 쓰기 가능" onclick="location='/project2_final/signup/login.do'"/> 
+			<input type="button" value="로그인 후 댓글 쓰기 가능" onclick="javascript:reflesh()"/> 
 		</c:when>
 	<c:otherwise>
 

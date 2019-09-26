@@ -27,22 +27,11 @@ h3 {
 		var id = ${result}.response.email;
 		var pw = id.split('@')[0];
 		var img = ${result}.response.profile_image;
-		$("#name").html("환영합니다. "+name+"님");
-		$("#email").html(id);
-		document.getElementById("img").src = img;
 		location=  "/project2_final/signup/CheckSocial.do?id="+id+"&pw="+pw+"&img="+img+"&name="+name;
 	  });
 </script>
 </head>
 <body>
-	<div
-		style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
-		<h3>Naver_Login Success</h3>
-	</div>
-	<br>
-	<h2 style="text-align: center" id="name"></h2>
-	<h4 style="text-align: center" id="email"></h4>
-	<img id="img" src="">
-${session }
+
 </body>
 </html>

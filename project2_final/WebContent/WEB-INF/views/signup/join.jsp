@@ -28,9 +28,14 @@
             alert("비밀번호를 동일하게 입력하세요");
             return false;
         }
+
+        if(!userinput.name.value) {
+            alert("이름을 입력하세요");
+            return false;
+        }
        
-        if(!userinput.username.value) {
-            alert("사용자 이름을 입력하세요");
+        if(!userinput.img.value) {
+            alert("프로필 사진을 등록하세요");
             return false;
         }
         

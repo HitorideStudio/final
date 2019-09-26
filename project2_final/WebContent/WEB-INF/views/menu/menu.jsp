@@ -8,7 +8,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Go !</a>
+      <a class="navbar-brand" href="/project2_final/map/welcome.do">Go !</a>
       <div class="dropdown">
   <button class="btn btn-danger" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="far fa-user"></i>
