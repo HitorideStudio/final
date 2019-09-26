@@ -1,14 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Document</title>
+
+<div id="hello"></div>
+<script type ="text/javascript">
+    what();
+    function what(){
+        document.getElementById('hello').innerHTML = 'hi';
+    };
+</script>
 </head>
+
 <body>
-<form action="search.do" method="post">
-	<input type="text" name="keyword">
-	<button type="submit">전송</button>
-</form>
+asd
+
 </body>
 </html>
