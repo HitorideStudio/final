@@ -189,13 +189,11 @@ public class signup {
 	//네이버로 사용자 값 받아오는 로직
 	@RequestMapping("callback.do")
 	public String callback(Model model,@RequestParam String code, @RequestParam String state, HttpSession session,memberVO vo) throws IOException{
-		System.out.println("여기는 signup callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		// 로그인 사용자 정보 읽어오기
 		apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result",apiResult);
-		
 		return "/signup/naverSuccess";
 	}
 	//네이버아이디로 회원가입 및 로그인 

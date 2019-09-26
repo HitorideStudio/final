@@ -71,7 +71,7 @@ var list = new Array();
 
 //jstl 혼합사용
 <c:forEach items="${list}" var="list">
-list.push("${list.name}"); //list[i]
+list.push("${list.placename}"); //list[i]
 list.push("${list.lon}"); //list[i+1]
 list.push("${list.lat}"); //list[i+2]
 list.push("${list.address}"); //list[i+3]
