@@ -32,7 +32,7 @@
               font-size:2.3em;
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;}
-    button{width:100px; height:60px; border:none; background:white; margin-left:50%;}
+              button{width:50px; height:30px; border:none; background:white; margin-left:50%;}
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -81,12 +81,12 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" name="keyword" id="keyword"> 
-                    <button type="submit">검색하기</button> 
+                    <button type="submit">검색하기</button><button onclick="allMarker(); return false;">전체보기</button>  
                 </form>
                
             </div>
         </div>
-         <button onclick="removeClus(); return false;">클러스삭제</button>
+         
         <hr>
         <ul id="placesList"></ul>
     	<div id="pagination"></div>
@@ -121,8 +121,30 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-
-
+//
+var clusterer = new kakao.maps.MarkerClusterer({
+	map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	markers:markers,
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+    minLevel: 2 // 클러스터 할 최소 지도 레벨 
+    
+});
+function allMarker(){
+	 $.ajax({
+	        url :'markerdata.do',
+	        data:{keyword:$("#keyword").val()},
+	        dataType:'json',
+	        success : function(data) { 
+				if(data==""){
+					alert("검색결과가없습니다.");
+					}else{
+						
+						placesSearchCB(data);
+						}
+					}
+	    });
+	
+}
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -156,7 +178,7 @@ function placesSearchCB(data) {
         // 정상적으로 검색이 완료됐으면
        
         // 검색 목록과 마커를 표출합니다
-    	
+    	clusterer.clear();
         displayPlaces(data);
      	addClus();
       
@@ -289,25 +311,13 @@ function removeMarker() {
 }
 
 function addClus(){
-	var clusterer = new kakao.maps.MarkerClusterer({
-		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		markers:markers,
-	    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	    minLevel: 2 // 클러스터 할 최소 지도 레벨 
-	    
-	});
+
 	clusterer.addMarkers( markers );
 }
 
 function removeClus(){
-	var clusterer = new kakao.maps.MarkerClusterer({
-		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		markers:markers,
-	    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	    minLevel: 2 // 클러스터 할 최소 지도 레벨 
-	    
-	});
-	clusterer.removeMarkers( markers );
+	clusterer.clear();
+	
 }
 
 
