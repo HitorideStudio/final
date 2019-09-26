@@ -83,10 +83,8 @@
                     키워드 : <input type="text" name="keyword" id="keyword"> 
                     <button type="submit">검색하기</button> 
                 </form>
-               
             </div>
         </div>
-         <button onclick="removeClus(); return false;">클러스삭제</button>
         <hr>
         <ul id="placesList"></ul>
     	<div id="pagination"></div>
@@ -99,13 +97,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e0cc7f923dfb2d33aa1685a125ad6cb&libraries=services&libraries=clusterer"></script>
 <script>
+//클러스터
 
 
 
 // 마커를 담을 배열입니다
 var markers = [];
-
-
+  
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -143,7 +141,6 @@ function searchPlaces() {
 			if(data==""){
 				alert("검색결과가없습니다.");
 				}else{
-					
 					placesSearchCB(data);
 					}
 				}
@@ -152,14 +149,11 @@ function searchPlaces() {
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data) {
-	
         // 정상적으로 검색이 완료됐으면
-       
         // 검색 목록과 마커를 표출합니다
-    	
         displayPlaces(data);
-     	addClus();
-      
+		
+	
         
 	//클러스터러
 	
@@ -193,7 +187,7 @@ function displayPlaces(places) {
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
             
           
-          
+
 
 	
 
@@ -231,7 +225,7 @@ function displayPlaces(places) {
 
         fragment.appendChild(itemEl);
     }
-   
+
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
     listEl.appendChild(fragment);
     menuEl.scrollTop = 0;
@@ -278,8 +272,6 @@ function addMarker(position) {
     return marker;
 }
 
-
-
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
     for ( var i = 0; i < markers.length; i++ ) {
@@ -288,27 +280,7 @@ function removeMarker() {
     markers = [];
 }
 
-function addClus(){
-	var clusterer = new kakao.maps.MarkerClusterer({
-		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		markers:markers,
-	    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	    minLevel: 2 // 클러스터 할 최소 지도 레벨 
-	    
-	});
-	clusterer.addMarkers( markers );
-}
 
-function removeClus(){
-	var clusterer = new kakao.maps.MarkerClusterer({
-		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		markers:markers,
-	    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	    minLevel: 2 // 클러스터 할 최소 지도 레벨 
-	    
-	});
-	clusterer.removeMarkers( markers );
-}
 
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
@@ -326,7 +298,12 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-
+var clusterer = new kakao.maps.MarkerClusterer({
+    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+    minLevel: 2 // 클러스터 할 최소 지도 레벨 
+});
+clusterer.addMarker(markers);  
 </script>
 </body>
 </html>

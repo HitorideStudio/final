@@ -65,12 +65,11 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 
 
 var list = new Array();
-var lon = new Array();
-var lat = new Array();
+
 
 //jstl 혼합사용
 <c:forEach items="${list}" var="list">
-list.push("${list.placename}"); //list[i]
+list.push("${list.name}"); //list[i]
 list.push("${list.lon}"); //list[i+1]
 list.push("${list.lat}"); //list[i+2]
 list.push("${list.address}"); //list[i+3]
@@ -78,6 +77,7 @@ list.push("${list.tel}"); //list[i+4]
 list.push("${list.place}");//list[i+5]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
+
 
 
 	
