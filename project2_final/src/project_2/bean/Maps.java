@@ -75,7 +75,7 @@ public class Maps {
 		if(keyword!=null) {
 			System.out.println(keyword);
 			list = sql.selectList("mapsql.searchplacelist",keyword);
-		}		
+		}	
 
 		return list;
 	}
