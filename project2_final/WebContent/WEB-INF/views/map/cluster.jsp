@@ -35,7 +35,9 @@
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;}
     button{width:100px; height:60px; border:none; background:white; margin-left:50%;}
+    
     </style>
+    
 </head>
 <body>
 <div style="float:left;">
@@ -89,7 +91,7 @@ list.push("${list.place}");//list[i+5]
 		});
 	
    
-		
+		var j=0;
 		console.log(clusterer);
 		
 		var overlay = new Array();
@@ -100,7 +102,9 @@ list.push("${list.place}");//list[i+5]
 		        	title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 		    	});
 		   	   clusterer.addMarker( markers ); //클러스터러 마커추가
-
+			var number = "'"+list[i+4]+"'";
+			var placename= "'"+list[i]+"'";
+			var place = "'"+list[i+5]+"'";
 			//클릭이벤트 커스텀오버레이 내용
 				var content = '<div class="wrap">' + 
 			        '    <div class="info">' + 
@@ -115,12 +119,12 @@ list.push("${list.place}");//list[i+5]
 			        '            <div class="desc">' + 
 			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
 			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a href="/project2_final/infoboard/writeForm.do?&number='+list[i+4]+'&placename='+list[i]+'&place='+list[i+5]+'" target="_blank" class="link">홈페이지</a></div>' + 
+			        '                <div><a class="btn-example" onclick="javascript:reply('+number+','+placename+','+place+')" target="_blank" class="link">리뷰 보기</a></div>' + 
 			        '            </div>' + 
 			        '        </div>' + 
 			        '    </div>' +    
 			        '</div>';
-			        
+			        //"/project2_final/infoboard/writeForm.do?&number='+list[i+4]+'&placename='+list[i]+'&place='+list[i+5]+'
 				clickover(i);
 				overlay[i].setMap(null);
 					  
@@ -139,7 +143,9 @@ list.push("${list.place}");//list[i+5]
 				});
 				
 		   	 kakao.maps.event.addListener(markers, 'click', function() {
-			  	    overlay[i].setMap(map);
+			  	     closeOverlay(j);
+			  	     overlay[i].setMap(map);
+			  	      j = i;			  	
 			  	});
 			}
 	
@@ -157,11 +163,11 @@ list.push("${list.place}");//list[i+5]
                 // 지도 중심을 이동 시킵니다
                 map.setCenter(moveLatLon);
             }
+     //마커안에 리뷰 클릭했을 때
+	function reply(number,placename,place){
+		window.open("/project2_final/infoboard/writeForm.do?&number="+number+"&placename="+placename+"&place="+place,"window","width=800,height=800,left=600,location=no");
+		}
 	
-</script>
-<script>
-
-
 </script>
 </body>
 </html>

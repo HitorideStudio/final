@@ -14,16 +14,16 @@
     <i class="far fa-user"></i>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  <c:choose>
-  <c:when test="${sessionScope.memId ==null }">
-    <a class="dropdown-item" href="/project2_final/signup/login.do">Login</a>
-  </c:when>
-  <c:otherwise>
-   <a class="dropdown-item" href="/project2_final/signup/modify.do">info</a>
-   <a class="dropdown-item" href="/project2_final/signup/logout.do" >logout</a>
-   <a class="dropdown-item" href="/project2_final/memberBoard/write.do" >board</a>
-  </c:otherwise>
-  </c:choose>  
+  	<c:choose>
+  	<c:when test="${sessionScope.memId ==null }">
+    	<a class="dropdown-item" href="/project2_final/signup/login.do">Login</a>
+  	</c:when>
+  	<c:otherwise>
+   		<a class="dropdown-item" href="/project2_final/signup/modify.do">info</a>
+   		<a class="dropdown-item" href="/project2_final/signup/logout.do" >logout</a>
+   		<a class="dropdown-item" href="/project2_final/memberBoard/write.do" >board</a>
+  	</c:otherwise>
+  	</c:choose>  
   </div>
 </div>
    
