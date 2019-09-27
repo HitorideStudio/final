@@ -6,7 +6,6 @@ public class PlaceListVO {
  private String tel;
  private String lon;
  private String lat;
- private String place;
  
 public String getPlacename() {
 	return placename;
@@ -38,12 +37,7 @@ public String getLat() {
 public void setLat(String lat) {
 	this.lat = lat;
 }
-public String getPlace() {
-	return place;
-}
-public void setPlace(String place) {
-	this.place = place;
-}
+
 
  
  

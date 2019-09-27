@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="rindb">
 	<insert id="rindbinsert" parameterType="vo">
-	   insert into placelist values(#{placename}, #{address}, #{tel}, #{lon}, #{lat},#{place})
+	   insert into placelist values(#{placename}, #{address}, #{tel}, #{lon}, #{lat})
 	</insert>
 </mapper>
