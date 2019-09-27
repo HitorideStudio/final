@@ -88,10 +88,7 @@ list.push("${list.address}"); //list[i+3]
 list.push("${list.tel}"); //list[i+4]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
-<<<<<<< HEAD
-=======
- 
->>>>>>> refs/remotes/origin/master
+
 
       // 클러스터 생성
       var clusterer = new kakao.maps.MarkerClusterer({
@@ -155,12 +152,9 @@ list.push("${list.tel}"); //list[i+4]
 		  	      j = i;		
               });
          
-<<<<<<< HEAD
-         }    
-=======
+
          }    
 
->>>>>>> refs/remotes/origin/master
 
          // 현재 위치로 이동합니다.
          function getLocation() {

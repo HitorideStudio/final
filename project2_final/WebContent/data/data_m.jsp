@@ -37,7 +37,7 @@
     		vo.setTel(rs.getString("tel"));
     		vo.setLon(rs.getString("lon"));
     	 	vo.setLat(rs.getString("lat"));
-    	 	vo.setPlace(rs.getString("place"));
+    	 	//vo.setPlace(rs.getString("place"));
     	 	placelist.add(vo);
     	}
 	out.print(placelist.toString());
