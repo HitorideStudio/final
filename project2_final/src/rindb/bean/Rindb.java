@@ -25,7 +25,11 @@ public class Rindb {
 		RConnection rc = new RConnection();
 		
 		//csv 파일을 불러온다
+<<<<<<< HEAD
 		RList list = rc.eval("x <- read.csv('D:/Dropbox/R/홍대전처리완료0926.csv',stringsAsFactors = F)").asList();
+=======
+		RList list = rc.eval("x <- read.csv('D:/R/신촌최종.csv',stringsAsFactors = F)").asList();
+>>>>>>> refs/remotes/origin/master
 		
 		//컬럼
 		int cols = list.size();

@@ -11,7 +11,7 @@
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .title {padding: 5px 0 0 10px;background:#fd5757;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
@@ -33,7 +33,7 @@
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;}
               button{width:50px; height:30px; border:none; background:white; margin-left:50%;}
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap, .map_wrap * {padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
@@ -69,6 +69,7 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+.wimg{vertical-align:top; width:2em; margin-left:10px}
 </style>
 </head>
 
@@ -86,7 +87,7 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" name="keyword" id="keyword"> 
-                    <button type="submit">검색하기</button><button onclick="allMarker(); return false;">전체보기</button>  
+                    <button type="submit">검색하기</button><button onclick="allMarker(); return false;">전체보기</button>
                 </form>
                
             </div>
@@ -97,6 +98,15 @@
     	<div id="pagination"></div>
     </div>
 </div>
+ <div style="float:left;">
+
+      <button type="button" id="favor" class="glyphicon glyphicon-star "/>
+   </div>
+<div id="favoo" style="display:none;">
+   <p> <h2 style="text-align:center;">FAVORITELIST</h2> </p>
+   <div id="favo" style="text-align:center;">
+   </div>
+   </div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -104,8 +114,17 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=545a5f015033824acfc1f335c12d37ca&libraries=services&libraries=clusterer"></script>
 <script>
+//즐겨찾기 toggle
+$('#favor').click(function(){
+ if( $("#favoo").is(":hidden") ) {
+	  $('#favoo').show();
+} else {
+   $("#favoo").hide()
+}
+});
 
-
+//오버레이 생성 
+var overlay = new Array();
 
 // 마커를 담을 배열입니다
 var markers = [];
@@ -208,7 +227,7 @@ function displayPlaces(places) {
 
 
     //클러스터러
-    
+     
     for ( var i=0; i<places.length; i++ ) {
 
         // 마커를 생성하고 지도에 표시합니다
@@ -216,10 +235,36 @@ function displayPlaces(places) {
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
             
-          
-          
+            //오버레이
+            var number = "'"+places[i].tel+"'";
+    		var placename= "'"+places[i].placename+"'";
+    		
+    			//클릭이벤트 커스텀오버레이 내용
+    			        var    content = '<div class="wrap">' + 
+    	                 '    <div class="info">' + 
+    	                 '        <div class="title">' + 
+    	                 	places[i].placename    +'<a href="javascript:wishclick('+number+','+placename+')"><img src="/project2_final/resources/img/wisha.png" class="wimg" /></a>'+
+    	                 '            <div class="close" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
+    	                 '        </div>' + 
+    	                 '        <div class="body">' + 
+    	                 '            <div class="img">' +
+    	                 '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+    	                 '           </div>' + 
+    	                 '            <div class="desc">' + 
+    	                 '                <div class="ellipsis">'+ places[i].address +'</div>' + 
+    	                 '                <div id= "tel" class="jibun ellipsis" name="tel">' + number + '</div>' + 
+    	                 '                <div><a class="btn-example" onclick="javascript:reply('+number+','+placename+')" target="_blank" class="link">리뷰 보기</a></div>' + 
+    	                 '            </div>' + 
+    	                 '        </div>' + 
+    	                 '    </div>' +    
+    	                 '</div>';
+    			        //"/project2_final/infoboard/writeForm.do?&number='+list[i+4]+'&placename='+list[i]+'&place='+list[i+5]+'
+    				clickover(content,places,i);
+    				overlay[i].setMap(null);
+				  
 
-	
+    				
+	   
 
 	
 	
@@ -263,6 +308,28 @@ function displayPlaces(places) {
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
 }
+
+var j=0;
+
+//오버레이제거
+function closeOverlay(i) {
+	overlay[i].setMap(null);  
+}
+//마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+function clickover(content,places,i){
+   overlay[i] = new kakao.maps.CustomOverlay({
+    content: content,
+    map: map,
+    position: new kakao.maps.LatLng(places[i].lat,places[i].lon)      
+});
+   kakao.maps.event.addListener(markers[i],'click', function() {
+		 closeOverlay(j);
+		     overlay[i].setMap(map);
+		     j = i;
+	 });
+}
+
+
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
@@ -339,6 +406,37 @@ function removeAllChildNods(el) {
     }
 }
 
+//즐겨찾기 추가 및 삭제
+function wishclick(no,placename){
+   var id = "${sessionScope.memId}";
+   console.log(no);
+   if(id == ""){
+      alert("로그인 후 사용해 주세요.")}
+   else{
+       $.ajax({
+         url: "wishlist.do",
+         type: "POST",
+         data: {no : no,
+              id :id,
+              placename : placename },                          
+         success: function(data) {
+             $("#favo").html(data); 
+                  }
+       
+       });
+   }
+}
+
+//마커안에 리뷰 클릭했을 때
+function reply(no,placename,place){
+	window.open("/project2_final/infoboard/writeForm.do?&number="+no+"&placename="+placename+"&place="+place,"window","width=800,height=800,left=600,location=no");
+	}
+//서치로 이동
+function search(){
+	location = "/project2_final/map/search.do";
+	}
+
+ 
 </script>
 
 </body>
