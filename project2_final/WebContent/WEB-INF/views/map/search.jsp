@@ -73,6 +73,11 @@
 </head>
 
 <body>
+<!--메뉴 -->
+<div>
+<jsp:include page="/WEB-INF/views/menu/menu.jsp" />
+</div>
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 

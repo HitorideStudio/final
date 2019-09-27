@@ -12,20 +12,20 @@
 		</trim>
 	</select>
 	  
-   <insert id="wishadd" parameterType="vo">
-   insert into favo values (1,#{info_id},#{member_id},sysdate)
+   <insert id="wishadd" parameterType="fvo">
+   insert into favo values (1,#{info_id},#{member_id},sysdate,#{placename})
    </insert>
    
-   <select id="wishcheck" parameterType="vo" resultType="int">
+   <select id="wishcheck" parameterType="fvo" resultType="int">
    select count(*) from favo where info_id = #{info_id} and member_id=#{member_id}
    </select>
    
-   <select id="wishrem" parameterType="vo" resultType="String">
-   select distinct placename,info_id from favo,member2,placelist where member2.id = #{member_id} and favo.member_id = member2.id and placelist.tel = favo.info_id
+   <select id="wishrem" parameterType="fvo" resultType="fvo">
+   select distinct placename,info_id from favo,member2 where member2.id = #{member_id} and favo.member_id = member2.id
    </select>
    
-   <delete id="deletewish" parameterType="vo">
-      delete from favo where info_id = #{info_id} and member_id=#{member_id}
+   <delete id="deletewish" parameterType="fvo">
+      delete from favo where placename = #{placename} and member_id=#{member_id}
    </delete>
    
 	

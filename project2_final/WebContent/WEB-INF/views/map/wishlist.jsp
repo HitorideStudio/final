@@ -7,7 +7,7 @@
   crossorigin="anonymous"></script>
  <script>
 //즐겨찾기 삭제
- function wishmove(num,i){
+ function wishmove(data,i){
       console.log(no);
    var id = "${sessionScope.memId}";
    var tag = "#test"+i;
@@ -16,7 +16,7 @@
          $.ajax({
             url: "del.do",
             type: "post",
-            data: { num : num},
+            data: { num : data},
             success: function(data) {
             $( tag ).remove();
             }
@@ -26,12 +26,12 @@
 
  </script>
  
-<!--즐겨찾기 list 받아와서 즐겨찾기 뿌려주기-->
  <c:set var="num" value="${no}" />
  <c:set var="i" value="0" />
  <c:forEach items="${favolist}" var="favolist">
   <c:set var="i" value="${i+1}" />
-  <div id="test${i }">
-<li>${favolist} <button type="button" name="${favolist}" style="width:10px;" onclick="javascript:wishmove('${num}','${i }')">X</button></li>
+  <div id="test${i}">
+<li>${favolist.placename}<button type="button" name="${favolist}" style="width:10px;" onclick="javascript:wishmove('${favolist.placename}','${i}')">X</button></li>
+
 </div>
 </c:forEach>

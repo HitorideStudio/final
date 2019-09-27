@@ -40,7 +40,7 @@
 </head>
 <body>
    <div style="float:left;">
-      <button type="button" class="glyphicon glyphicon-search " onclick="" />
+      <button type="button" class="glyphicon glyphicon-search " onclick="search()" />
       <button type="button" class="glyphicon glyphicon-share-alt " onclick="getLocation()" />
       <button type="button" id="favor" class="glyphicon glyphicon-star "/>
       <button type="button" class="glyphicon glyphicon-heart-empty " onclick=""  />
@@ -96,7 +96,8 @@ list.push("${list.tel}"); //list[i+4]
           averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
           minLevel: 2 // 클러스터 할 최소 지도 레벨 
       });
-
+	  //오버레이 변수(2)
+      var j=0;
       //오버레이 생성 
       var overlay = new Array();
         for(i=0;i<list.length;i+=5){
@@ -106,12 +107,16 @@ list.push("${list.tel}"); //list[i+4]
                  title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
              });
                clusterer.addMarker( markers ); //클러스터러 마커추가
+			//리뷰 정보 조회 변수
+   			var placename= "'"+list[i]+"'";
+   			var place = "'"+list[i+5]+"'";
+   
          //클릭이벤트 커스텀오버레이 내용
-          no = "'"+list[i+4]+"'";
+         var no = "'"+list[i+4]+"'";
          var    content = '<div class="wrap">' + 
                  '    <div class="info">' + 
                  '        <div class="title">' + 
-                            list[i]    +'<a href="javascript:wishclick('+no+')">'+<c:if test="${num != 1}">'<img src="/project2_final/img/wisha.png" class="wimg" />'+</c:if><c:if test="${num == 1}">'<img src="/project2_final/img/wishb.png" class="wimg" />'</c:if>'</a>'+
+                            list[i]    +'<a href="javascript:wishclick('+no+')"><img src="/project2_final/resources/img/wisha.png" class="wimg" />'+
                  '            <div class="close" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
                  '        </div>' + 
                  '        <div class="body">' + 
@@ -121,7 +126,7 @@ list.push("${list.tel}"); //list[i+4]
                  '            <div class="desc">' + 
                  '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
                  '                <div id= "tel" class="jibun ellipsis" name="tel">' + list[i+4] + '</div>' + 
-                 '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+                 '                <div><a class="btn-example" onclick="javascript:reply('+no+','+placename+','+place+')" target="_blank" class="link">리뷰 보기</a></div>' + 
                  '            </div>' + 
                  '        </div>' + 
                  '    </div>' +    
@@ -132,13 +137,9 @@ list.push("${list.tel}"); //list[i+4]
             function closeOverlay(i) {
                overlay[i].setMap(null);     
             }    
-
-                 
-
         }
       // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
             function clickover(i){
-            console.log(i);
                overlay[i] = new kakao.maps.CustomOverlay({
                 content: content,
                 map: map,
@@ -146,7 +147,9 @@ list.push("${list.tel}"); //list[i+4]
             });
             
              kakao.maps.event.addListener(markers, 'click', function() {
-                  overlay[i].setMap(map);
+            	 closeOverlay(j);
+		  	     overlay[i].setMap(map);
+		  	      j = i;		
               });
          
          }    
@@ -185,6 +188,16 @@ list.push("${list.tel}"); //list[i+4]
                    });
                }
             }
+
+            //마커안에 리뷰 클릭했을 때
+        	function reply(no,placename,place){
+        		window.open("/project2_final/infoboard/writeForm.do?&number="+no+"&placename="+placename+"&place="+place,"window","width=800,height=800,left=600,location=no");
+        		}
+        	//서치로 이동
+        	function search(){
+        		location = "/project2_final/map/search.do";
+        		}
+        	
 </script>
 </body>
 </html>

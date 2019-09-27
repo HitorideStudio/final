@@ -7,7 +7,15 @@ public class FavoVO {
    private String info_id;
    private String member_id;
    private Date date;
+   private String placename;
    
+ 
+   public String getPlacename() {
+	   return placename;
+   }
+   public void setPlacename(String placename) {
+	   this.placename = placename;
+   }
    public int getFavo_id() {
       return favo_id;
    }
