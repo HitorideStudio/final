@@ -107,7 +107,7 @@ body {
 				Kakao.Auth.createLoginButton({
 				container : '#kakao-login-btn',
 				success : function(authObj) {
-				alert(JSON.stringify(authObj));
+				//alert(JSON.stringify(authObj));
 				// 로그인 성공시, API를 호출합니다.
 				Kakao.API.request({
 					url : '/v1/user/me',

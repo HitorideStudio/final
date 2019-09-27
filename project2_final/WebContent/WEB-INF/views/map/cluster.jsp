@@ -46,8 +46,8 @@
    </div>
    <div id="map" style="width:80%;height:690px; margin-left:5%; float:left;"></div>
    <br/><br/>
-   <div id="favoo">
-   <h2 style="text-align:center;">FAVORITELIST</h2>
+   <div id="favoo" style="display:none;">
+   <p> <h2 style="text-align:center;">FAVORITELIST</h2> </p>
    <div id="favo" style="text-align:center;">
    </div>
    </div>
@@ -58,11 +58,13 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6e0cc7f923dfb2d33aa1685a125ad6cb&libraries=clusterer"></script>
 <script>
 //즐겨찾기 toggle
-$(document).ready(function(){
-     $("#favor").click(function(){
-       $("#favoo").fadeToggle("slow");
-     });
-   });
+ $('#favor').click(function(){
+  if( $("#favoo").is(":hidden") ) {
+	  $('#favoo').show();
+} else {
+    $("#favoo").hide()
+}
+ });
 // map 생성   
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
