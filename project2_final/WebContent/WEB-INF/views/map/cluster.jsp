@@ -88,52 +88,8 @@ list.push("${list.address}"); //list[i+3]
 list.push("${list.tel}"); //list[i+4]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
+ 
 
-
-   
-<<<<<<< HEAD
-		var j=0;
-		console.log(clusterer);
-		
-		var overlay = new Array();
-		  for(i=0;i<list.length;i+=5){
-				 markers = new kakao.maps.Marker({
-		       		map: map, // 마커를 표시할 지도 
-		        	position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
-		        	title : list[i] // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		    	});
-		   	   clusterer.addMarker( markers ); //클러스터러 마커추가
-			var number = "'"+list[i+4]+"'";
-			var placename= "'"+list[i]+"'";
-			var place = "'"+list[i+5]+"'";
-			//클릭이벤트 커스텀오버레이 내용
-				var content = '<div class="wrap">' + 
-			        '    <div class="info">' + 
-			        '        <div class="title">' + 
-			                	list[i]    + 
-			        '            <div class="close" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
-			        '        </div>' + 
-			        '        <div class="body">' + 
-			        '            <div class="img">' +
-			        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-			        '           </div>' + 
-			        '            <div class="desc">' + 
-			        '                <div class="ellipsis">'+ list[i+3] +'</div>' + 
-			        '                <div class="jibun ellipsis">' + list[i+4] + '</div>' + 
-			        '                <div><a class="btn-example" onclick="javascript:reply('+number+','+placename+','+place+')" target="_blank" class="link">리뷰 보기</a></div>' + 
-			        '            </div>' + 
-			        '        </div>' + 
-			        '    </div>' +    
-			        '</div>';
-			        //"/project2_final/infoboard/writeForm.do?&number='+list[i+4]+'&placename='+list[i]+'&place='+list[i+5]+'
-				clickover(i);
-				overlay[i].setMap(null);
-					  
-		      function closeOverlay(i) {
-		    	  overlay[i].setMap(null);     
-		      }
-		    	  			
-=======
       // 클러스터 생성
       var clusterer = new kakao.maps.MarkerClusterer({
           map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
@@ -197,7 +153,7 @@ list.push("${list.tel}"); //list[i+4]
               });
          
          }    
->>>>>>> branch 'master' of https://github.com/HitorideStudio/final.git
+
 
          // 현재 위치로 이동합니다.
          function getLocation() {

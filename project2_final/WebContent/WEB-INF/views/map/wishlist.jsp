@@ -8,7 +8,7 @@
  <script>
 //즐겨찾기 삭제
  function wishmove(data,i){
-      console.log(no);
+      
    var id = "${sessionScope.memId}";
    var tag = "#test"+i;
       var conf = confirm("즐겨찾기를 제거하시겠어요?");
