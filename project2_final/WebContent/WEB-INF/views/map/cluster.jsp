@@ -76,7 +76,6 @@ list.push("${list.lon}"); //list[i+1]
 list.push("${list.lat}"); //list[i+2]
 list.push("${list.address}"); //list[i+3]
 list.push("${list.tel}"); //list[i+4]
-list.push("${list.place}");//list[i+5]
 </c:forEach>
 // 마커 클러스터러를 생성합니다 
 
@@ -95,7 +94,7 @@ list.push("${list.place}");//list[i+5]
 		console.log(clusterer);
 		
 		var overlay = new Array();
-		  for(i=0;i<list.length;i+=6){
+		  for(i=0;i<list.length;i+=5){
 				 markers = new kakao.maps.Marker({
 		       		map: map, // 마커를 표시할 지도 
 		        	position: new kakao.maps.LatLng(list[i+2],list[i+1]), // 마커를 표시할 위치
